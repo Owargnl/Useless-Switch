@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Toggle</title>
+    <style>
+        /* Body styling for centering */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white;
+            color: black;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        /* Switch container styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 40px;
+        }
+
+        /* Hide default checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* Slider design */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: black; /* Default opposite color */
+            transition: 0.2s;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 32px;
+            width: 32px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white; /* Same as default background color */
+            transition: 0.2s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Change colours and position when checked */
+        input:checked + .slider {
+            background-color: white; /* Opposite colour when checked */
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+            background-color: black; /* Same as background color when checked */
+        }
+    </style>
+</head>
+<body>
+    <label class="switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider"></span>
+    </label>
+
+    <audio id="toggleSound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
+    <script>
+        const toggle = document.getElementById('themeToggle');
+        const toggleSound = document.getElementById('toggleSound');
+
+        toggle.addEventListener('change', () => {
+            // Play the toggle sound
+            toggleSound.currentTime = 0; // Reset sound to start
+            toggleSound.play();
+
+            // Change the background and text colour based on the toggle state
+            if (toggle.checked) {
+                document.body.style.backgroundColor = 'black';
+                document.body.style.color = 'white';
+            } else {
+                document.body.style.backgroundColor = 'white';
+                document.body.style.color = 'black';
+            }
+        });
+    </script>
+</body>
+</html>
